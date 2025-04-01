@@ -1,0 +1,69 @@
+{
+	"name": "transify",
+	"displayName": "Transify",
+	"description": "Just simple quick translation",
+	"version": "0.0.1",
+	"publisher": "vyvu",
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/vnvyvu/transify-vscode-extension"
+	},
+	"author": {
+		"name": "vyvu",
+		"email": "vutrivi99@yahoo.com.vn",
+		"url": "https://github.com/vnvyvu"
+	},
+	"icon": "images/icon.jpg",
+	"engines": {
+		"vscode": "^1.98.0"
+	},
+	"categories": [
+		"Other"
+	],
+	"activationEvents": [
+		"onStartupFinished"
+	],
+	"main": "./dist/extension.js",
+	"contributes": {
+		"configuration": {
+			"title": "Transify",
+			"properties": {
+				"transify.targetLanguages": {
+					"type": "string",
+					"default": "vi",
+					"description": "Target language for translation (e.g., 'vi' for Vietnamese, 'en' for English)"
+				}
+			}
+		}
+	},
+	"scripts": {
+		"vscode:prepublish": "yarn run package",
+		"compile": "yarn run check-types && yarn run lint && node esbuild.js",
+		"watch": "npm-run-all -p watch:*",
+		"watch:esbuild": "node esbuild.js --watch",
+		"watch:tsc": "tsc --noEmit --watch --project tsconfig.json",
+		"package": "yarn run check-types && yarn run lint && node esbuild.js --production",
+		"compile-tests": "tsc -p . --outDir out",
+		"watch-tests": "tsc -p . -w --outDir out",
+		"pretest": "yarn run compile-tests && yarn run compile && yarn run lint",
+		"check-types": "tsc --noEmit",
+		"lint": "eslint src",
+		"test": "vscode-test"
+	},
+	"devDependencies": {
+		"@types/mocha": "^10.0.10",
+		"@types/node": "20.x",
+		"@types/vscode": "^1.98.0",
+		"@typescript-eslint/eslint-plugin": "^8.28.0",
+		"@typescript-eslint/parser": "^8.28.0",
+		"@vscode/test-cli": "^0.0.10",
+		"@vscode/test-electron": "^2.4.1",
+		"esbuild": "^0.25.1",
+		"eslint": "^9.23.0",
+		"npm-run-all": "^4.1.5",
+		"typescript": "^5.8.2"
+	},
+	"dependencies": {
+		"googletrans": "^1.0.21"
+	}
+}
